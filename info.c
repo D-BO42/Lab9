@@ -37,7 +37,12 @@ int main(int argc, char* argv[])
     
     int ncore = get_nprocs();
     printf("Cores: %d\n", ncore);
-    int pages;
-    int bytes;
+    long page_size = sysconf(_SC_PAGE_SIZE);
+    long phys_pages = sysconf(_SC_PHYS_PAGES);
+    long total = page_size * phys_pages;
+    printf("Mem size bytes: %ld\n", total);
+    long free_pages = sysconf(_SC_AVPHYS_PAGES);
+    long free = free_pages * page_size;
+    printf("Free mem:  %ld\n", free);
     return 0;
 }
