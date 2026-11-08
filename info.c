@@ -1,4 +1,4 @@
-// Name, etc
+// Dylan Bodoh, 111
 
 // info.c
 #include <stdio.h>

@@ -1,4 +1,4 @@
-// Dylan Bodoh
+// Dylan Bodoh, 111
 
 // pinfo.c
 #include <stdio.h>
