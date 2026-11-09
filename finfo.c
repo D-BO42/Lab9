@@ -11,6 +11,7 @@
 #include <string.h>
 
 void print_file_type(mode_t mode) {
+    //file type
     if (S_ISREG(mode)) {
         printf("File Type: Regular File\n");
     }
@@ -38,6 +39,7 @@ void print_file_type(mode_t mode) {
 }
 
 void print_permissions(mode_t mode) {
+    //permissions string
     char perms[10];
     //terenary ops for permisions
     perms[0] = (mode & S_IRUSR) ? 'r' : '-';
@@ -59,23 +61,24 @@ void print_permissions(mode_t mode) {
 
 int main(int argc, char *argv[]) {
     struct stat fileInfo;
-
+    //if no argument
     if (argc != 2) {
         fprintf(stderr, "Usage: %s <filename>\n", argv[0]);
         return 1;
     }
-
+    //if file could not be found
     if (stat(argv[1], &fileInfo) == -1) {
         perror("could not get file");
         return 1;
     }
-
+    //call helper methods
     print_file_type(fileInfo.st_mode);
     print_permissions(fileInfo.st_mode);
-
+    //uid
     printf("Owner UID: %u\n", fileInfo.st_uid);
+    //size
     printf("Size: %lld bytes\n", (long long) fileInfo.st_size);
-
+    //last modifide
     char timeStr[100];
     struct tm *tm_info = localtime(&fileInfo.st_mtime);
 
